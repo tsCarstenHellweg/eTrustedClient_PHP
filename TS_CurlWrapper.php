@@ -13,6 +13,12 @@ class MyTSCurlWrapper extends TS_CurlWrapper
     }
 }
 // */
+// if you use the option above, pls delete the following lines
+if( is_file( __DIR__ . '/../eTrusted_localconfig.php' ) )
+{
+    require_once __DIR__ . '/../eTrusted_localconfig.php';
+}
+
 
 /**
  * This is the wrapper class for the eTrusted API.
