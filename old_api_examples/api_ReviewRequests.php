@@ -22,12 +22,12 @@ $data[ 'tsId ' ] = $config[ 'tsID' ];
 
 // the order part
 $order = array();
-$order[ 'orderDate' ]             = '2019-05-18';
-$order[ 'orderReference' ]        = 'your_order_number';
+$order[ 'orderDate' ]             = '2019-11-18';
+$order[ 'orderReference' ]        = 'carstenzTest3';
 $order[ 'currency' ]              = 'EUR';
 $order[ 'amount' ]                = 11.11;
 $order[ 'paymentType' ]           = 'DIRECT_DEBIT';
-$order[ 'estimatedDeliveryDate' ] = '2019-05-20';
+$order[ 'estimatedDeliveryDate' ] = '2019-11-20';
 
 // subpart oof the order: products
 $products = array();
@@ -52,7 +52,7 @@ $consumer = array();
 $consumer[ 'firstname' ] = 'test0r';
 $consumer[ 'lastname' ]  = 'test';
 $contact = array();
-$contact[ 'email' ]      = 'test@mail.de';
+$contact[ 'email' ]      = 'carsten.hellweg@trustedshops.de';
 $contact[ 'language' ]   = 'DE';
 $consumer[ 'contact' ]   = $contact;
 $data[ 'consumer' ] = $consumer;
@@ -62,16 +62,22 @@ $sender[ 'type' ] = 'ThirdParty';
 $data[ 'sender' ] = $sender;
 
 $types = array();
-$types[ 'key' ] = 'shop';
+$type = array();
+$type[ 'key' ] = 'shop';
 // $types[ 'key' ] = 'products';
+
+$types[] = $type;
 $data[ 'types' ] = $types;
 
 // debug
 echo '<pre>sending data:', print_r( $data, 1 ), '</pre>';
 // */
 
-$dataString = json_encode( $data );
 $loginData = base64_encode( $config[ 'username' ] . ':' . $config[ 'password' ] );
+$dataString = json_encode( $data );
+
+
+
 $curl = curl_init();
 curl_setopt_array($curl, array(
     CURLOPT_URL            => 'https://api.trustedshops.com/rest/restricted/v2/shops/'. $config[ 'tsID' ] .'/reviews/requests',
@@ -95,7 +101,7 @@ $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 curl_close($curl);
 
 $resultJSON = json_decode( $response );
-echo '<pre>Result:', print_r( $resultJSON, 1 ), '</pre>';
+echo '<pre>Result:', print_r( $response, 1 ), '</pre>';
 if( $err )
 {
     echo 'ERROR' . PHP_EOL;
