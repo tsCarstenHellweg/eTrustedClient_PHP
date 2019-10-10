@@ -87,7 +87,7 @@ curl_setopt_array($curl, array(
         , 'content-type: application/json'
      ),
 ));
-curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
+curl_setopt($curl, CURLOPT_POSTFIELDS, $dataString);
 
 $response = curl_exec($curl);
 $err = curl_error($curl);
