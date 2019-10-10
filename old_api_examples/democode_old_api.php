@@ -66,17 +66,12 @@ $types[ 'key' ] = 'shop';
 // $types[ 'key' ] = 'products';
 $data[ 'types' ] = $types;
 
-// encode login-data
-$loginData = base64_encode( $config[ 'username' ] . ':' . $config[ 'password' ] );
-
-
 // debug
 echo '<pre>sending data:', print_r( $data, 1 ), '</pre>';
 // */
 
-die(); 
-
 $dataString = json_encode( $data );
+$loginData = base64_encode( $config[ 'username' ] . ':' . $config[ 'password' ] );
 $curl = curl_init();
 curl_setopt_array($curl, array(
     CURLOPT_URL            => 'https://api.trustedshops.com/rest/restricted/v2/shops/'. $config[ 'tsID' ] .'/reviews/requests',
@@ -87,9 +82,9 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST  => "POST",
     CURLOPT_HTTPHEADER => array(
-        "authorization: Basic ".$login."",
-        "cache-control: no-cache",
-        "content-type: application/json"
+          'authorization: Basic ' . $loginData
+        , 'cache-control: no-cache'
+        , 'content-type: application/json'
      ),
 ));
 curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
