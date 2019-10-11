@@ -18,7 +18,7 @@ if( is_file( __DIR__ . '/../../trustedshops_local.php' ) )
 
 $config = getTrustedShopsConfig();
 $data = array();
-$data[ 'tsId ' ] = $config[ 'tsID' ];
+$data[ 'tsId' ] = $config[ 'tsID' ];
 
 // the order part
 $order = array();
